@@ -1,0 +1,5 @@
+exportPattern("^[[:alpha:]]+")
+
+import(dplyr)
+import(tidyr)
+import(ggplot2)

@@ -1,0 +1,21 @@
+Package: wormsplot
+Type: Package
+Title: Tools for Visualizing the Movements of Historical Figures
+Version: 0.1.0
+Date: 2023-04-09
+Depends: R (>= 3.5.0)
+Imports: dplyr, tidyr, ggplot2
+Author: Louis Teitelbaum <louist@post.bgu.ac.il>
+Maintainer: Louis Teitelbaum <louist@post.bgu.ac.il>
+Description: The `wormsplot` package can be used to easily visualize the lives of
+    historical figures as they moved from place to place. Expanding on `ggplot2`,
+    the package provides a new geom, `geom_worm`, which allows for an arbitrary
+    number of moves within each worm, and takes intuitively structured data input.
+    The package also includes a convenience function, `wormsplot`, for generating
+    aesthetic plots with minimal effort.
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/rimonim/wormsplot
+RoxygenNote: 7.2.1
+Roxygen: list(markdown = TRUE)
