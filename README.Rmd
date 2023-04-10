@@ -30,8 +30,9 @@ devtools::install_github("rimonim/wormsplot")
 
 Here is a plot of the lives of scientists who won the Nobel Prize for physics between 1901 and 1907.
 
-```{r nobel_physicists-example, fig.height = 6, fig.width = 7}
-library(tidyverse)
+```{r nobel_physicists-example, dpi=300, fig.height = 6, fig.width = 7}
+library(dplyr)
+library(ggplot2)
 library(wormsplot)
 
 data(nobel_physicists)
@@ -46,7 +47,7 @@ nobel_physicists %>%
 
 Plots can also be built from scratch using `geom_worm()`:
 
-```{r geom_worm-example, fig.height = 5, fig.width = 7}
+```{r geom_worm-example, dpi=300, fig.height = 5, fig.width = 7}
 library(ggplot2)
 
 data <- data.frame(
