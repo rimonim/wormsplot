@@ -26,15 +26,7 @@ Here is a plot of the lives of scientists who won the Nobel Prize for
 physics between 1901 and 1907.
 
 ``` r
-library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
+library(dplyr, warn.conflicts = FALSE)
 library(ggplot2)
 library(wormsplot)
 
@@ -43,17 +35,19 @@ data(nobel_physicists)
 nobel_physicists %>%
   filter(name %in% head(unique(name), 10)) %>%
   mutate(country = forcats::fct_drop(country)) %>%
-  wormsplot('year', 'country', 'name', color = 'initial',
-            linewidth = 5, region.label.width = 19, size = 3) +
+  wormsplot('year', 'country', 'name', worm.color = 'initial',
+            worm.args = list(linewidth = 5.1), region.label.width = 22, label.args = list(size = 3.6)) +
   labs(title = "The Lives of Winners of the Nobel Prize in Physics 1901-1907")
 ```
 
 <img src="man/figures/README-nobel_physicists-example-1.png" width="100%" />
 
-Plots can also be built from scratch using `geom_worm()`:
+Plots can also be built from scratch using `geom_worm()` or
+`stat_worm()`:
 
 ``` r
-library(ggplot2)
+library(colorspace)
+library(ggborderline)
 
 data <- data.frame(
   x = c(5, 10, 25, 30, 15, 20, 25),
@@ -61,9 +55,10 @@ data <- data.frame(
   person = c('Me', 'Me', 'Me', 'Me', 'You', 'You', 'You')
   )
 
-ggplot(data, aes(x, y, group = person, color = person)) +
-  geom_worm(linewidth = 10, shorten_lines = 10) +
-  theme_minimal()
+ggplot(data, aes(x, y, group = person, color = person, bordercolor = after_scale(darken(colour, .2)))) +
+  stat_worm(linewidth = 10, shorten_lines = 10, geom = 'borderline', lineend = 'round') +
+  theme_minimal() +
+  scale_y_continuous(limits = c(0, 3))
 ```
 
 <img src="man/figures/README-geom_worm-example-1.png" width="100%" />

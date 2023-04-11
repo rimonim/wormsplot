@@ -30,8 +30,8 @@ devtools::install_github("rimonim/wormsplot")
 
 Here is a plot of the lives of scientists who won the Nobel Prize for physics between 1901 and 1907.
 
-```{r nobel_physicists-example, dpi=300, fig.height = 6, fig.width = 7}
-library(dplyr)
+```{r nobel_physicists-example, dpi=200, fig.height = 6, fig.width = 7}
+library(dplyr, warn.conflicts = FALSE)
 library(ggplot2)
 library(wormsplot)
 
@@ -40,15 +40,16 @@ data(nobel_physicists)
 nobel_physicists %>%
   filter(name %in% head(unique(name), 10)) %>%
   mutate(country = forcats::fct_drop(country)) %>%
-  wormsplot('year', 'country', 'name', color = 'initial',
-            linewidth = 5, region.label.width = 19, size = 3) +
+  wormsplot('year', 'country', 'name', worm.color = 'initial',
+            worm.args = list(linewidth = 5.1), region.label.width = 22, label.args = list(size = 3.6)) +
   labs(title = "The Lives of Winners of the Nobel Prize in Physics 1901-1907")
 ```
 
-Plots can also be built from scratch using `geom_worm()`:
+Plots can also be built from scratch using `geom_worm()` or `stat_worm()`:
 
-```{r geom_worm-example, dpi=300, fig.height = 5, fig.width = 7}
-library(ggplot2)
+```{r geom_worm-example, dpi=200, fig.height = 5, fig.width = 7}
+library(colorspace)
+library(ggborderline)
 
 data <- data.frame(
   x = c(5, 10, 25, 30, 15, 20, 25),
@@ -56,7 +57,8 @@ data <- data.frame(
   person = c('Me', 'Me', 'Me', 'Me', 'You', 'You', 'You')
   )
 
-ggplot(data, aes(x, y, group = person, color = person)) +
-  geom_worm(linewidth = 10, shorten_lines = 10) +
-  theme_minimal()
+ggplot(data, aes(x, y, group = person, color = person, bordercolor = after_scale(darken(colour, .2)))) +
+  stat_worm(linewidth = 10, shorten_lines = 10, geom = 'borderline', lineend = 'round') +
+  theme_minimal() +
+  scale_y_continuous(limits = c(0, 3))
 ```

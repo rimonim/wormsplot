@@ -10,16 +10,15 @@ wormsplot(
   region = "y",
   id = "id",
   label.worms = TRUE,
-  shorten_lines = 1,
-  n = 50,
-  ...,
+  label.args = list(),
+  worm.color = "initial",
+  worm.args = list(linewidth = 10),
+  backplate.args = list(alpha = 0.3),
   region.spacing = 2,
-  color = "initial",
-  linewidth = 10,
   x.padding = 1,
   region.label.width = 4,
-  x.breaks.by = 10,
-  backplate.alpha = 0.3
+  region.label.args = list(),
+  x.breaks.by = 10
 )
 }
 \arguments{
@@ -33,30 +32,27 @@ wormsplot(
 
 \item{label.worms}{If \code{TRUE} (default) worms will be labeled with their id}
 
-\item{shorten_lines}{How much space should be given for smooth transitions between
-steps? \code{0} results in a regular stepped line. Default is 1. Smoothing is capped at
-half the width of the shortest adjacent step.}
+\item{label.args}{list. additional parameters to be passed to \code{geom_text()}}
 
-\item{n}{The number of points drawn for each Bezier curve. In other words: How smooth
-or jagged are the transitions? Default is 100.}
-
-\item{...}{additional parameters to be passed to \code{geom_worm()} and \code{geom_text()}}
-
-\item{region.spacing}{How much padding be added to regions on the y axis?}
-
-\item{color}{How should the worms be colored? If 'initial' (default), color is according
+\item{worm.color}{How should the worms be colored? If 'initial' (default), color is according
 to their region of origin. If 'final', color will be according to their final destination.
 'id' will give each worm its own color.}
 
-\item{linewidth}{The width of the worms.}
+\item{worm.args}{list. additional parameters to be passed to \code{stat_worm()}}
+
+\item{backplate.args}{list. additional parameters to be passed to \code{geom_tile()} for creating
+colored boxes underneath the plot.}
+
+\item{region.spacing}{How much padding be added to regions on the y axis?}
 
 \item{x.padding}{Extra space beyond the highest and lowest plotted values on the x axis.}
 
 \item{region.label.width}{The horizontal width of colored boxes under the region labels.}
 
-\item{x.breaks.by}{Frequency of breaks on the x axis. Defaults to 10.}
+\item{region.label.args}{list. additional parameters to be passed to \code{geom_tile()} for creating
+colored boxes underneath region labels.}
 
-\item{backplate.alpha}{Transparency of colored boxes underneath the plot. Defaults to 0.3.}
+\item{x.breaks.by}{Frequency of breaks on the x axis. Defaults to 10.}
 }
 \description{
 \code{wormsplot()} is a convenience function that automatically dodges worms along the
@@ -78,12 +74,4 @@ the resulting ggplot object.
   )
 
   wormsplot(data, 'date', 'place', 'person')
-
-  data(nobel_physicists)
-  nobel_physicists \%>\%
-    filter(name \%in\% head(unique(name), 10)) \%>\%
-    mutate(country = forcats::fct_drop(country)) \%>\%
-    wormsplot('year', 'country', 'name', color = 'initial',
-    linewidth = 5.5, region.label.width = 18, size = 3.6) +
-    labs(title = "The Lives of Winners of the Nobel Prize in Physics 1901-1907")
 }
