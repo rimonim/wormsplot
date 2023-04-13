@@ -11,7 +11,7 @@
 #' @param id string. The name of the grouping variable.
 #' @param label.worms If `TRUE` (default) worms will be labeled with their id
 #' @param label.args list. additional parameters to be passed to `geom_text()`
-#' @param worm.args list. additional parameters to be passed to `stat_worm()`
+#' @param worm.args list. additional parameters to be passed to `stat_worm()`. Specifying `aes()` will overwrite existing aesthetics.
 #' @param backplate.args list. additional parameters to be passed to `geom_tile()` for creating
 #' colored boxes underneath the plot.
 #' @param region.spacing How much padding be added to regions on the y axis?
@@ -39,6 +39,10 @@
 #'
 #'   wormsplot(data, 'date', 'place', 'person')
 
+#' @import dplyr
+#' @import tidyr
+#' @importFrom grDevices colorRamp
+#' @importFrom RColorBrewer brewer.pal
 #' @rdname wormsplot
 #' @export
 wormsplot <- function(data, x = 'x', region = 'y', id = 'id', label.worms = TRUE,
@@ -69,16 +73,20 @@ wormsplot <- function(data, x = 'x', region = 'y', id = 'id', label.worms = TRUE
              midpoint = start + .5*length) %>%
       group_by(grouplabel) %>% filter(length == max(length)) %>% select(y, midpoint, grouplabel)
   }
+  # Add base aesthetics if not specified manually
+  if(any(sapply(worm.args, function(x) class(x) == "uneval")) == FALSE){
+    worm.args <- append(list(aes(x, y, group = group, color = color)), worm.args)
+  }
   # Set default palette
   palette = colorRampPalette(RColorBrewer::brewer.pal(min(8, length(unique(data$y))), "Set1"))(length(unique(data$y)))
   # plot
   p <- ggplot(data) +
     do.call(geom_tile, append(list(aes(x, breaks, height = heights, fill = labels, width = width), data = regions), backplate.args)) +
-    do.call(stat_worm, append(list(aes(x, y, group = group, color = color)), worm.args)) +
+    do.call(stat_worm, worm.args) +
     do.call(geom_tile, append(list(aes(min_x - .5*region.label.width, breaks, height = heights, fill = labels), width = region.label.width, data = regions), region.label.args)) +
     do.call(geom_text, append(list(aes(min_x - .5*region.label.width, breaks, label = labels), data = regions), label.args)) +
     geom_tile(aes(first(x) - .5*region.label.width, mean(c(max(data$cumwidth), 0)), height = sum(heights), width = first(width) + region.label.width),
-         fill = NA, color = "black", linewidth = .5, data = regions) +
+              fill = NA, color = "black", linewidth = .5, data = regions) +
     theme_minimal() +
     theme(axis.text.y = element_blank(),
           axis.title.y = element_text(margin = margin(r = -15)),

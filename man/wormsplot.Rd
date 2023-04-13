@@ -38,7 +38,7 @@ wormsplot(
 to their region of origin. If 'final', color will be according to their final destination.
 'id' will give each worm its own color.}
 
-\item{worm.args}{list. additional parameters to be passed to \code{stat_worm()}}
+\item{worm.args}{list. additional parameters to be passed to \code{stat_worm()}. Specifying \code{aes()} will overwrite existing aesthetics.}
 
 \item{backplate.args}{list. additional parameters to be passed to \code{geom_tile()} for creating
 colored boxes underneath the plot.}
