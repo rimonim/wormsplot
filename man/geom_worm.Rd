@@ -138,12 +138,12 @@ geom_worm understands the following aesthetics (required aesthetics are in bold)
 \examples{
    # one data point for each new step, plus one extra for the end of the worm
    data <- data.frame(
-      x = c(5, 10, 25, 30, 15, 20, 25),
-      y = c(1, 2, 1.5, 1.5, 3, 1, 1),
-      group = c('Me', 'Me', 'Me', 'Me', 'You', 'You', 'You')
+      x = c(1, 2, 4, 1, 3, 4, 1, 1.5, 2.5, 4),
+      y = c(1, 2, 2, 2, 1, 1, 1.5, 1, 1.7, 1.7),
+      group = rep(c("you", "me", "him"), times = c(3, 3, 4))
    )
 
    ggplot(data, aes(x, y, group = group, color = group)) +
-    geom_worm(linewidth = 10)
+    geom_worm(linewidth = 10, shorten_lines = .2, dodge = 0.1)
 }
 \keyword{datasets}
