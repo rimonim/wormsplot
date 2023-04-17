@@ -7,7 +7,7 @@
 \alias{geom_worm}
 \title{Worms}
 \format{
-An object of class \code{StatWorm} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 3.
+An object of class \code{StatWorm} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 4.
 }
 \usage{
 StatWorm
@@ -19,6 +19,7 @@ stat_worm(
   position = "identity",
   shorten_lines = 1,
   n = 100,
+  dodge = 0,
   arrow = NULL,
   lineend = "butt",
   linejoin = "round",
@@ -35,6 +36,7 @@ geom_worm(
   position = "identity",
   shorten_lines = 1,
   n = 100,
+  dodge = 0,
   arrow = NULL,
   lineend = "butt",
   linejoin = "round",
@@ -76,6 +78,10 @@ half the width of the shortest adjacent step.}
 
 \item{n}{The number of points drawn for each Bezier curve. In other words: How smooth
 or jagged are the transitions? Default is 100.}
+
+\item{dodge}{Worm steps less than this distance apart will be grouped and dodged on
+the y axis. 0 results in no dodging (default). Dodging is implemented here as part of
+the stat (rather than as a position function) so that Bezier curves can be drawn afterward.}
 
 \item{arrow}{Arrow specification, as created by \code{\link[grid:arrow]{grid::arrow()}}.}
 

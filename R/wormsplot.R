@@ -68,7 +68,7 @@ wormsplot <- function(data, x = 'x', region = 'y', id = 'id', label.worms = TRUE
   if(label.worms) {
     # save id labels for later
     ids <- data %>%
-      pivot_wider(id_cols = c(y, grouplabel, subgroup), names_from = 'b', values_from = 'x') %>%
+      pivot_wider(id_cols = c(y, grouplabel, segment), names_from = 'b', values_from = 'x') %>%
       mutate(length = end-start,
              midpoint = start + .5*length) %>%
       group_by(grouplabel) %>% filter(length == max(length)) %>% select(y, midpoint, grouplabel)

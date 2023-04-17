@@ -44,10 +44,10 @@ prep_worm <- function(data, shorten_lines = 1, groupwise = TRUE) {
 
         rows <- data.frame(x = c(data$x[i] - shortening, data$x[i] + shortening),
                            y = c(data$y[i-1L], data$y[i]))
-        cbind(rows, unclass(data[(i-1L):i, cols_to_keep]))
+        cbind(rows, select(data[(i-1L):i, ], all_of(cols_to_keep)))
       }else{
         rows <- data[i, c('x', 'y')]
-        cbind(rows, unclass(data[i, cols_to_keep]))
+        cbind(rows, select(data[i, ], all_of(cols_to_keep)))
       }
     })
   }else{
@@ -62,15 +62,74 @@ prep_worm <- function(data, shorten_lines = 1, groupwise = TRUE) {
 
           rows <- data.frame(x = c(d$x[i] - shortening, d$x[i] + shortening),
                              y = c(d$y[i-1L], d$y[i]))
-          cbind(rows, unclass(d[(i-1L):i, cols_to_keep]))
+          cbind(rows, select(d[(i-1L):i, ], all_of(cols_to_keep)))
         }else{
           rows <- d[i, c('x', 'y')]
-          cbind(rows, unclass(d[i, cols_to_keep]))
+          cbind(rows, select(d[i, ], all_of(cols_to_keep)))
         }
       }))
     }
   }
   do.call(rbind, newrows)
+}
+
+cut_group <- function(x, groupwidth) {
+  x_ordered <- sort(unique(x), decreasing = FALSE)
+  min <- x_ordered[1]
+  levels <- x_ordered[c(TRUE, diff(x_ordered) >= groupwidth)]
+  findInterval(x, levels)
+}
+
+dodge_steps <- function(data, shorten_lines = 1, dodge = NULL) {
+  collapse_jumps <- any(dodge > unlist(lapply(unique(data$group),
+                                              function(x){min(abs(diff(rle(data[data$group == x, 'y'])$values)))}
+                                              ))
+                        )
+  # Label overlapping subgroups for dodging
+  data <- arrange(mutate(arrange(data, group),
+                         ybin = cut_group(y, dodge),
+                         segment = rep(1:n(), each = 2, length.out = n()),
+                         b = rep(c('start', 'end'), length.out = n())),
+                  ybin, x)
+  if(collapse_jumps){
+    cli::cli_warn(c('`dodge` is larger than some transitions in the dataset.',
+                    i = 'Are you sure you want to dodge that much?'))
+  }
+  overlaps <- 0L
+  data$overlaps <- NA
+  dodgegroup <- 1L
+  data$dodgegroup <- NA
+  for (i in 1:nrow(data)) {
+    if(data$b[i] == 'start'){
+      overlaps <- overlaps + 1L
+      data$overlaps[i] <- max(1L, overlaps)
+    }else{
+      data$overlaps[i] <- max(1L, overlaps)
+      overlaps <- overlaps - 1L
+    }
+
+    if(i == 1L || data$ybin[i] != data$ybin[i-1L]){
+      dodgegroup <- dodgegroup + 1L
+      data$dodgegroup[i] <- dodgegroup
+    }else if(overlaps == 0L){
+      data$dodgegroup[i] <- dodgegroup
+      dodgegroup <- dodgegroup + 1L
+    }else{
+      data$dodgegroup[i] <- dodgegroup
+    }
+  }
+
+  # For each dodgegroup, count member segments and compute offset
+  # y distance between steps will be dodge/max(data$overlaps)
+  ydist <- dodge/max(data$overlaps)
+  data <- mutate(group_by(data, dodgegroup),
+                 total_height = length(unique(group))*ydist,
+                 offset = rep(match(rle(group)$values, unique(group)),
+                              times = rle(group)$lengths)*ydist,
+                 y = mean(y) + offset - total_height/2)
+
+  # Output reordered data
+  arrange(data, group, segment, x)
 }
 
 dodge_in_region <- function(data, region.spacing = 1, color = 'initial') {
@@ -93,11 +152,13 @@ dodge_in_region <- function(data, region.spacing = 1, color = 'initial') {
   # count overlaps
   data <- data %>%
     prep_worm(groupwise = FALSE) %>%
-    arrange(group) %>% mutate(subgroup = rep(1:n(), each = 2, length.out = n()),
+    arrange(group) %>% mutate(segment = rep(1:n(), each = 2, length.out = n()),
                               b = rep(c('start', 'end'), length.out = n())) %>%
     arrange(y, x)
   overlaps <- 0L
   data$overlaps <- NA
+
+
   for (i in 1:nrow(data)) {
     if(data$b[i] == 'start'){
       overlaps <- overlaps + 1L
@@ -114,7 +175,7 @@ dodge_in_region <- function(data, region.spacing = 1, color = 'initial') {
                 summarise(width = max(width)) %>%
                 mutate(cumwidth = cumsum(width) + 1:nrow(.)*region.spacing),
               by = c('y', 'width')) %>%
-    mutate(suby = rep(as.integer(as.factor(rle(group)$values)), times = rle(group)$lengths))
+    mutate(suby = rep(match(rle(group)$values, unique(group)), times = rle(group)$lengths))
   data <- data %>% mutate(y = cumwidth - suby) %>%
     arrange(group, x)
   data

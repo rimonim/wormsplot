@@ -19,3 +19,7 @@ LazyData: true
 URL: https://github.com/rimonim/wormsplot
 RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

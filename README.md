@@ -36,7 +36,7 @@ nobel_physicists %>%
   filter(name %in% head(unique(name), 10)) %>%
   mutate(country = forcats::fct_drop(country)) %>%
   wormsplot('year', 'country', 'name', worm.color = 'initial',
-            worm.args = list(linewidth = 5.1), region.label.width = 22, label.args = list(size = 3.6)) +
+            worm.args = list(linewidth = 5.1, lineend = 'round'), region.label.width = 22, label.args = list(size = 3.6)) +
   labs(title = "The Lives of Winners of the Nobel Prize in Physics 1901-1907")
 ```
 

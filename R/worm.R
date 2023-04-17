@@ -8,6 +8,9 @@
 #' half the width of the shortest adjacent step.
 #' @param n The number of points drawn for each Bezier curve. In other words: How smooth
 #' or jagged are the transitions? Default is 100.
+#' @param dodge Worm steps less than this distance apart will be grouped and dodged on
+#' the y axis. 0 results in no dodging (default). Dodging is implemented here as part of
+#' the stat (rather than as a position function) so that Bezier curves can be drawn afterward.
 #' @import ggplot2
 #'
 #' @details
@@ -39,9 +42,16 @@
 
 #' @rdname geom_worm
 StatWorm <- ggproto("StatWorm", Stat,
-                    compute_group = function(data, scales, shorten_lines = 1, n = 100) {
+                    setup_data = function(data, params){
+                      data <- prep_worm(data, params$shorten_lines, groupwise = FALSE)
+                      if(params$dodge != 0){
+                        dodge_steps(data, params$shorten_lines, params$dodge)
+                      }else{
+                        data
+                      }
+                    },
+                    compute_group = function(data, scales, dodge = 0, shorten_lines = 1, n = 100) {
                       cols_to_keep <- setdiff(names(data), c("x", "y"))
-                      data <- prep_worm(data, shorten_lines)
                       data <- rbind(data[1,], data)
                       newrows <- lapply(2:nrow(data), function(i) {
                         if (data$y[i] != data$y[i-1L]) {
@@ -60,13 +70,13 @@ StatWorm <- ggproto("StatWorm", Stat,
 #' @export
 stat_worm <- function(mapping = NULL, data = NULL, geom = "path",
                       position = 'identity',
-                      shorten_lines = 1, n = 100,
+                      shorten_lines = 1, n = 100, dodge = 0,
                       arrow = NULL, lineend = 'butt', linejoin = "round",
                       na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, ...) {
   layer(
     data = data, mapping = mapping, stat = StatWorm, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(shorten_lines = shorten_lines, n = n,
+    params = list(shorten_lines = shorten_lines, n = n, dodge = dodge,
                   arrow = arrow, lineend = lineend, linejoin = linejoin,
                   na.rm = na.rm, ...)
   )
@@ -76,13 +86,13 @@ stat_worm <- function(mapping = NULL, data = NULL, geom = "path",
 #' @export
 geom_worm <- function(mapping = NULL, data = NULL, stat = 'worm',
                       position = 'identity',
-                      shorten_lines = 1, n = 100,
+                      shorten_lines = 1, n = 100, dodge = 0,
                       arrow = NULL, lineend = 'butt', linejoin = "round",
                       na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, ...) {
   layer(
     data = data, mapping = mapping, stat = stat, geom = GeomPath,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(shorten_lines = shorten_lines, n = n,
+    params = list(shorten_lines = shorten_lines, n = n, dodge = dodge,
                   arrow = arrow, lineend = lineend, linejoin = linejoin,
                   na.rm = na.rm, ...)
   )
