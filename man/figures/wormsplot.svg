@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="200mm"
+   height="200mm"
+   viewBox="0 0 200 200"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e, 2022-07-14)"
+   sodipodi:docname="wormsplot.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.98990943"
+     inkscape:cx="216.68649"
+     inkscape:cy="481.86226"
+     inkscape:window-width="1470"
+     inkscape:window-height="750"
+     inkscape:window-x="0"
+     inkscape:window-y="37"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer3" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="background"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="star"
+       style="fill:#f2f2f2;stroke-width:0.264583;stroke-miterlimit:10;-inkscape-stroke:none;stop-color:#000000"
+       id="path1219"
+       inkscape:flatsided="true"
+       sodipodi:sides="6"
+       sodipodi:cx="96.74234"
+       sodipodi:cy="84.861702"
+       sodipodi:r1="87.444618"
+       sodipodi:r2="50.522106"
+       sodipodi:arg1="1.5707963"
+       sodipodi:arg2="2.0943951"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 96.742342,172.30632 -75.729262,-43.72231 -2e-6,-87.444615 75.72926,-43.7223113 75.729262,43.7223073 0,87.444619 z"
+       inkscape:transform-center-y="8.4320635"
+       transform="matrix(1.0712736,0,0,1.0098015,-3.6375123,13.189439)"
+       inkscape:transform-center-x="-4.7782135e-06" />
+    <g
+       id="vertical"
+       style="stroke-width:1.5;stroke-dasharray:none">
+      <path
+         style="fill:none;stroke:#fefefe;stroke-width:1.5;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         d="M 100.03879,196.38472 V 6.6057585 Z"
+         id="path438"
+         inkscape:label="path438" />
+      <path
+         style="fill:none;stroke:#fefefe;stroke-width:1.5;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         d="M 21.038795,190.54806 V 0.7690958 Z"
+         id="path1298"
+         inkscape:label="path438" />
+      <path
+         style="fill:none;stroke:#fefefe;stroke-width:1.5;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         d="M 60.038795,190.54806 V 0.7690958 Z"
+         id="path438-5"
+         inkscape:label="path438" />
+      <path
+         style="fill:none;stroke:#fefefe;stroke-width:1.5;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         d="M 140.03879,190.54806 V 0.7690958 Z"
+         id="path1270"
+         inkscape:label="path438" />
+      <path
+         style="fill:none;stroke:#fefefe;stroke-width:1.5;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         d="M 179.03879,190.54806 V 0.7690958 Z"
+         id="path1282"
+         inkscape:label="path438" />
+    </g>
+    <g
+       id="horizontal"
+       style="stroke-width:1.5;stroke-dasharray:none"
+       transform="matrix(0,1,-0.89776028,0,188.08268,-1.461882)">
+      <path
+         style="fill:none;stroke:#fefefe;stroke-width:1.5;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         d="M 100.03879,196.38472 V 6.6057585 Z"
+         id="path2069"
+         inkscape:label="path438" />
+      <path
+         style="fill:none;stroke:#fefefe;stroke-width:1.5;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         d="M 21.038795,190.54806 V 0.7690958 Z"
+         id="path2071"
+         inkscape:label="path438" />
+      <path
+         style="fill:none;stroke:#fefefe;stroke-width:1.5;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         d="M 60.038795,190.54806 V 0.7690958 Z"
+         id="path2073"
+         inkscape:label="path438" />
+      <path
+         style="fill:none;stroke:#fefefe;stroke-width:1.5;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         d="M 140.03879,190.54806 V 0.7690958 Z"
+         id="path2075"
+         inkscape:label="path438" />
+      <path
+         style="fill:none;stroke:#fefefe;stroke-width:1.5;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         d="M 179.03879,190.54806 V 0.7690958 Z"
+         id="path2077"
+         inkscape:label="path438" />
+    </g>
+    <path
+       id="path133"
+       style="fill:#4d4d4d;stroke-width:0.264583;stroke-miterlimit:10;-inkscape-stroke:none;stop-color:#000000"
+       inkscape:transform-center-x="-4.1330689e-06"
+       inkscape:transform-center-y="9.4502515"
+       d="M 96.74242 -2.5828565 L 21.012996 41.139553 L 21.012996 128.58392 L 96.74242 172.30632 L 172.47141 128.58392 L 172.47141 41.139553 L 96.74242 -2.5828565 z M 96.74242 5.9388902 L 164.31255 44.950435 L 164.31255 122.97353 L 96.74242 161.98507 L 29.172286 122.97353 L 29.172286 44.950435 L 96.74242 5.9388902 z "
+       transform="matrix(1.2006315,0,0,1.1317366,-16.151899,3.8600068)"
+       inkscape:label="path133" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="worms"
+     transform="matrix(-1,0,0,1,199.60998,-1.0583333)">
+    <path
+       style="fill:none;stroke:#b64f4f;stroke-width:12;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+       d="m 49.544678,57.204501 h 34.544915 c 6.735497,0 3.679942,50.238709 10.454381,50.238709 h 77.786306"
+       id="path2178"
+       sodipodi:nodetypes="czzc" />
+    <path
+       style="fill:none;stroke:#5066b7;stroke-width:12;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+       d="m 154.59377,94.160136 -29.70702,0 c -7.9996,0 -2.10636,-17.864411 -10.1522,-17.864411 H 27.279702"
+       id="path11388"
+       sodipodi:nodetypes="czzc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="text">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:31.75px;line-height:1;font-family:'PT Sans';-inkscape-font-specification:'PT Sans Bold';text-align:end;text-decoration-color:#000000;direction:rtl;text-anchor:end;fill:#4d4d4d;fill-opacity:1;stroke:#c44343;stroke-width:10;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+       x="27.767399"
+       y="140.45334"
+       id="text7243"
+       inkscape:label="text7243"><tspan
+         sodipodi:role="line"
+         id="tspan7241"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:31.75px;font-family:'PT Sans';-inkscape-font-specification:'PT Sans Bold';fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:10"
+         x="27.767399"
+         y="140.45334">wormsplot</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888889px;line-height:1;font-family:'PT Sans';-inkscape-font-specification:'PT Sans';text-align:end;text-decoration-color:#000000;direction:rtl;text-anchor:end;fill:#4d4d4d;fill-opacity:1;stroke:#c44343;stroke-width:10;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+       x="6.0850167"
+       y="210.79669"
+       id="text1535"
+       inkscape:label="text7243"
+       transform="rotate(-28.555289)"><tspan
+         sodipodi:role="line"
+         id="tspan1533"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'PT Sans';-inkscape-font-specification:'PT Sans';fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:10;font-size:4.93888889px"
+         x="6.0850167"
+         y="210.79669">github.com/rimonim/wormsplot</tspan></text>
+  </g>
+</svg>

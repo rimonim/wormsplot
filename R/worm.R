@@ -43,6 +43,16 @@
 #' @rdname geom_worm
 StatWorm <- ggproto("StatWorm", Stat,
                     setup_data = function(data, params){
+                      if(any(unlist(lapply(unique(data$group),
+                                        function(group){
+                                          group_ys <- as.numeric(data$y[data$group == group])
+                                          (tail(group_ys, 1) != tail(group_ys, 2)[1]) || any(rle(head(group_ys, -1))$lengths > 1)
+                                          }
+                                        )
+                                 )
+                      )){cli::cli_warn(c('Your data is not formatted in standard worm format.',
+                                        i = 'Make sure that each worm has one data point for each new step, plus one extra for the end of each worm'))
+                      }
                       data <- prep_worm(data, params$shorten_lines, groupwise = FALSE)
                       if(params$dodge != 0){
                         dodge_steps(data, params$shorten_lines, params$dodge)

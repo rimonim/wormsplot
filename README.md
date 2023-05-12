@@ -1,5 +1,5 @@
 
-# wormsplot
+# wormsplot <img src="man/figures/wormsplot.svg" align="right" width=200/>
 
 A worms plot is an elegant way to visualize historical (or fictional!)
 characters as they move from place to place. Expanding on `ggplot2`,
@@ -38,6 +38,9 @@ nobel_physicists %>%
   wormsplot('year', 'country', 'name', worm.color = 'initial',
             worm.args = list(linewidth = 5.1, lineend = 'round'), region.label.width = 22, label.args = list(size = 3.6)) +
   labs(title = "The Lives of Winners of the Nobel Prize in Physics 1901-1907")
+#> Warning: Your data is not formatted in standard worm format.
+#> ℹ Make sure that each worm has one data point for each new step, plus one extra
+#>   for the end of each worm
 ```
 
 <img src="man/figures/README-nobel_physicists-example-1.png" width="100%" />
